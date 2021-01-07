@@ -1,3 +1,5 @@
+import { IPicture, IPicturesPage } from './types';
+
 /**
  * Core class is the main class that contains the definitions
  * and other stuff required for the app to run.
@@ -17,25 +19,60 @@ class Core {
   healthCheck(): string {
     return 'check';
   }
-
-  async getAuth() {
+  /**
+   * Function to request an Auth token for the application.
+   *
+   * @returns Promise
+   */
+  async getAuth(): Promise<any> {
     const body = { apiKey: this.apikey };
-    const res = await this.postData(`${this.baseUrl}/auth`, body);
+    const res = await this._postData(`${this.baseUrl}/auth`, body);
     if (res.auth) {
       this.authBearer = res.token;
     }
     return res;
   }
-
-  async getImages(page?: number) {
+  /**
+   * Function to request Pictures Page from the API.
+   *
+   * @param  {number} page? Page number or first if null.
+   * @returns Promise
+   */
+  async getImages(page?: number): Promise<IPicturesPage> {
     const url = `${this.baseUrl}/images${page ? '?page=' + page : ''}`;
 
+    return this._getData(url);
+  }
+  /**
+   * Function to request more data from a specific image.
+   *
+   * @param  {string} id  The image/picture's id.
+   * @returns Promise
+   */
+  async getImageData(id: string): Promise<IPicture> {
+    const url = `${this.baseUrl}/images/${id}`;
+
+    return this._getData(url);
+  }
+  /**
+   * Main wrapper for GET requests.
+   *
+   * @param  {string} url  The URL to request.
+   * @returns Promise
+   */
+  async _getData(url: string): Promise<any> {
     return await fetch(url, {
       headers: { Authorization: `Bearer ${this.authBearer}` },
     }).then((res) => res.json());
   }
-
-  async postData(url = '', data = {}): Promise<any> {
+  /**
+   * Main wrapper for POST requests.
+   *
+   * @param  {} url=''   The URL to peform the request.
+   * @param  {} data={}  The object containing the body data.
+   * @returns Promise
+   */
+  async _postData(url = '', data = {}): Promise<any> {
     return await fetch(url, {
       method: 'POST',
       headers: {

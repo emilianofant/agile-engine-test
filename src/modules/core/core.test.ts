@@ -35,4 +35,17 @@ describe('Core class tests', () => {
       });
     });
   });
+
+  test('Get image specific information from API', () => {
+    return newCore.getImageData('36204883f737d82b04da').then((res) => {
+      expect(res).toEqual({
+        id: expect.any(String),
+        author: expect.any(String),
+        camera: expect.any(String),
+        tags: expect.any(String),
+        cropped_picture: expect.any(String),
+        full_picture: expect.any(String),
+      });
+    });
+  });
 });

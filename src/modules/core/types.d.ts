@@ -1,21 +1,20 @@
-// export type Board = Array<Array<BoardCell>>;
+export interface IPicturesPage {
+  pictures: Array<IPictureMin>;
+  hasMore: boolean;
+  page: number;
+  pageCount: number;
+}
 
-// export type BoardCell = {
-//   type: squareContentTypes;
-//   value: number | null;
-// };
+export interface IPictureMin {
+  id: string;
+  cropped_picture: string;
+}
 
-// export type Tuple = Array<number>;
-
-// export enum squareContentTypes {
-//   EMPTY = 0,
-//   BOMB,
-//   DISCOVERED,
-// }
-
-// // @todo: change for a better name
-// export interface IBoardStatus {
-//   bombsCount: number;
-//   bombsPositions: Array<Tuple>;
-//   emptyPositions: Array<Tuple>;
-// }
+export interface IPicture {
+  id: string;
+  author: string;
+  camera: string;
+  tags: string;
+  cropped_picture: string;
+  full_picture: string;
+}
