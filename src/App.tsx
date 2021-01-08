@@ -12,7 +12,7 @@ function App(): JSX.Element {
           <div>
             <ul>
               <li>
-                <Link to="/">Main</Link>
+                <Link to="/">Home</Link>
               </li>
             </ul>
           </div>

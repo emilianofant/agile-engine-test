@@ -1,5 +1,14 @@
 import React from 'react';
+import Core from '../core/core';
 
-const AppContext = React.createContext<string>('context message');
+interface IAppContext {
+  core: Core | null;
+  isAuth: boolean;
+}
+
+const AppContext = React.createContext<IAppContext>({
+  core: null,
+  isAuth: false,
+});
 
 export default AppContext;
