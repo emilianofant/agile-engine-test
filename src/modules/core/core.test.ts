@@ -37,7 +37,7 @@ describe('Core class tests', () => {
   });
 
   test('Get image specific information from API', () => {
-    return newCore.getImageData('36204883f737d82b04da').then((res) => {
+    return newCore.getImageData('8d9368f388d599d08cf8').then((res) => {
       expect(res).toEqual({
         id: expect.any(String),
         author: expect.any(String),
