@@ -1,6 +1,9 @@
 .photoView {
   &_pictureContainer {
-    img {
+    max-height: 100%;
+    position: relative;
+
+    &_img {
       opacity: 1;
       display: block;
       width: 100%;
@@ -8,12 +11,18 @@
       transition: .5s ease;
       backface-visibility: hidden;
 
-      &:hover {
+    }
+
+    &:hover  {
+      img {
         opacity: 0.3;
+      }
+      div {
+        opacity: 1;
       }
     }
 
-    div {
+    &_tags {
       transition: .5s ease;
       opacity: 0;
       position: absolute;
@@ -21,15 +30,13 @@
       left: 50%;
       transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
-
-      &:hover  {
-        opacity: 1;
-      }
     }
 
     &_tags {
+      background-color: white;
       color: black;
-      opacity: 1;
+      font-size: 16px;
+      padding: 16px 32px;
     }
   }
 }

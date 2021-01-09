@@ -14,7 +14,11 @@ const PhotoView: FunctionComponent<IPhotoViewProps> = (props) => {
         <div className="photoView">
           <h2>{picture.id}</h2>
           <div className="photoView_pictureContainer">
-            <img src={picture.full_picture} alt="Image" />
+            <img
+              className="photoView_pictureContainer_img"
+              src={picture.full_picture}
+              alt="Image"
+            />
             <div className="photoView_pictureContainer_tags">{picture.tags}</div>
           </div>
           <span>{picture.author}</span>
