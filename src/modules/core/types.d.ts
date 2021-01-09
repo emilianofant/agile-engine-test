@@ -18,3 +18,9 @@ export interface IPicture {
   cropped_picture: string;
   full_picture: string;
 }
+
+export interface IPagination {
+  currentIndex: number;
+  hasNext: boolean;
+  hasPrev: boolean;
+}

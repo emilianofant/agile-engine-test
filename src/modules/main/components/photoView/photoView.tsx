@@ -1,33 +1,60 @@
 import React, { FunctionComponent } from 'react';
-import { IPicture } from '../../../core/types';
+import { IPagination, IPicture } from '../../../core/types';
 import './photoView.scss';
 
 interface IPhotoViewProps {
   picture: IPicture | null;
+  pagination: IPagination;
+  onHandleNavigation: any;
 }
 
 const PhotoView: FunctionComponent<IPhotoViewProps> = (props) => {
-  const { picture } = props;
+  const { picture, pagination, onHandleNavigation } = props;
+
   return (
-    <div>
+    <>
       {picture ? (
         <div className="photoView">
-          <h2>{picture.id}</h2>
           <div className="photoView_pictureContainer">
             <img
               className="photoView_pictureContainer_img"
               src={picture.full_picture}
               alt="Image"
             />
-            <div className="photoView_pictureContainer_tags">{picture.tags}</div>
+            <div className="photoView_pictureContainer_tags">
+              <h4 className="ui horizontal divider header">
+                <i className="bar chart icon"></i>
+                Photo information
+              </h4>
+              <table className="ui definition table">
+                <tbody>
+                  <tr>
+                    <td className="two wide column">Author</td>
+                    <td>{picture.author}</td>
+                  </tr>
+                  <tr>
+                    <td>Camera</td>
+                    <td>{picture.camera}</td>
+                  </tr>
+                  <tr>
+                    <td>Hashtags</td>
+                    <td>{picture.tags}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <span>{picture.author}</span>
-          <span>{picture.camera}</span>
+          <button onClick={() => onHandleNavigation('prev')} disabled={!pagination.hasPrev}>
+            PREV
+          </button>
+          <button onClick={() => onHandleNavigation('next')} disabled={!pagination.hasNext}>
+            NEXT
+          </button>
         </div>
       ) : (
         'No data available'
       )}
-    </div>
+    </>
   );
 };
 
