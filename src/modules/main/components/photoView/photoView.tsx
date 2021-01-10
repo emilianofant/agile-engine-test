@@ -10,6 +10,7 @@ interface IPhotoViewProps {
 
 const PhotoView: FunctionComponent<IPhotoViewProps> = (props) => {
   const { picture, pagination, onHandleNavigation } = props;
+  const facebookShareURL = `https://www.facebook.com/sharer/sharer.php?u=${picture?.full_picture}`;
 
   return (
     <>
@@ -21,6 +22,12 @@ const PhotoView: FunctionComponent<IPhotoViewProps> = (props) => {
               src={picture.full_picture}
               alt="Image"
             />
+            {/* Example sharing an image through FB. Ideally, it should share the gallery URL. */}
+            <button className="circular ui icon button">
+              <a href={facebookShareURL}>
+                <i className="icon share"></i>
+              </a>
+            </button>
             <div className="photoView_pictureContainer_tags">
               <h4 className="ui horizontal divider header">
                 <i className="bar chart icon"></i>
