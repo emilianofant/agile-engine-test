@@ -38,13 +38,16 @@
       font-size: 16px;
       padding: 16px 32px;
     }
+
+    .shareButton {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      z-index: 99;
+    }
   }
 
-  .ui.icon.button {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    z-index: 99;
+  &_buttonsContainer {
+    text-align: center;
   }
-
 }

@@ -23,7 +23,7 @@ const PhotoView: FunctionComponent<IPhotoViewProps> = (props) => {
               alt="Image"
             />
             {/* Example sharing an image through FB. Ideally, it should share the gallery URL. */}
-            <button className="circular ui icon button">
+            <button className="circular ui icon button shareButton">
               <a href={facebookShareURL}>
                 <i className="icon share"></i>
               </a>
@@ -51,12 +51,26 @@ const PhotoView: FunctionComponent<IPhotoViewProps> = (props) => {
               </table>
             </div>
           </div>
-          <button onClick={() => onHandleNavigation('prev')} disabled={!pagination.hasPrev}>
-            PREV
-          </button>
-          <button onClick={() => onHandleNavigation('next')} disabled={!pagination.hasNext}>
-            NEXT
-          </button>
+          <div className="photoView_buttonsContainer">
+            <div className="ui buttons">
+              <button
+                className="ui labeled icon button"
+                onClick={() => onHandleNavigation('prev')}
+                disabled={!pagination.hasPrev}
+              >
+                <i className="left chevron icon"></i>
+                Prev
+              </button>
+              <button
+                className="ui right labeled icon button"
+                onClick={() => onHandleNavigation('next')}
+                disabled={!pagination.hasNext}
+              >
+                Next
+                <i className="right chevron icon"></i>
+              </button>
+            </div>
+          </div>
         </div>
       ) : (
         'No data available'
