@@ -5,6 +5,12 @@ A Frontend test for AgileEngine.
 
 In the project directory, you can run:
 
+### Instalation
+
+I'm using `nvm` and `npm`.
+1. Run `nvm use` or be sure to have Node 12.
+2. Run `npm i`
+
 ### `npm start`
 
 Runs the app in the development mode.\
