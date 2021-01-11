@@ -113,7 +113,11 @@ const MainContainer: FunctionComponent = () => {
       <Gallery picturesPage={picturesPage} onImageClick={(id: string) => openModal(id)} />
       <div className="ui divider"></div>
       <div style={footerStyles}>
-        <button className="ui large blue button" onClick={onRequestMorePictures}>
+        <button
+          className="ui large blue button"
+          onClick={onRequestMorePictures}
+          disabled={picturesPage?.hasMore}
+        >
           More photos
         </button>
       </div>
