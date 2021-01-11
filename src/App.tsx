@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { Main } from './modules/';
 import './App.scss';
@@ -9,13 +8,13 @@ function App(): JSX.Element {
     <AppProvider>
       <div className="App">
         <Router>
-          <div>
+          {/* <div>
             <ul>
               <li>
                 <Link to="/">Home</Link>
               </li>
             </ul>
-          </div>
+          </div> */}
           <Switch>
             <Route exact path="/">
               <Main />

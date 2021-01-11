@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import { IPicturesPage } from '../../../core/types';
 import './gallery.scss';
 
 interface IGalleryProps {
   picturesPage: IPicturesPage | undefined;
-  onImageClick: any;
+  onImageClick: (id: string) => void;
 }
 
 const Gallery: FunctionComponent<IGalleryProps> = (props) => {

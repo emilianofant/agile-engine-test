@@ -18,6 +18,12 @@ const MainContainer: FunctionComponent = () => {
       transform: 'translate(-50%, -50%)',
     },
   };
+  const footerStyles = {
+    paddingBottom: '16px',
+  };
+  const headerStyles = {
+    margin: '20px 0',
+  };
   const { core, isAuth } = appContext;
   const [picturesPage, setPicturesPage] = useState<IPicturesPage>();
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -27,6 +33,7 @@ const MainContainer: FunctionComponent = () => {
     hasPrev: false,
   });
   const [pictureData, setPictureData] = useState<IPicture | null>(null);
+  const [currentPicturesPage, setCurrentPicturesPage] = useState<number>(1);
 
   const updatePagination = () => {
     if (picturesPage && pictureData) {
@@ -41,6 +48,18 @@ const MainContainer: FunctionComponent = () => {
         });
       }
     }
+  };
+
+  const onRequestMorePictures = async () => {
+    const newPageNumber = currentPicturesPage + 1;
+    setCurrentPicturesPage(newPageNumber);
+    const currentPictures = picturesPage?.pictures;
+    core?.getImages(newPageNumber).then((res) => {
+      if (res.pictures) {
+        const newPicturesList = currentPictures ? currentPictures.concat(res.pictures) : [];
+        setPicturesPage({ ...res, pictures: newPicturesList });
+      }
+    });
   };
 
   const openModal = async (id: string) => {
@@ -65,11 +84,6 @@ const MainContainer: FunctionComponent = () => {
     }
   };
 
-  const afterOpenModal = () => {
-    // updatePagination();
-    // subtitle.style.color = '#f00';
-  };
-
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -80,11 +94,12 @@ const MainContainer: FunctionComponent = () => {
       setPicturesPage(res);
     };
 
-    // @todo: eventually, a pagination component will manage
+    // @todo: eventually, a pagination component will handle
     //        the photos management.
     if (isAuth && picturesPage === undefined) {
       getPicturesPageData();
     }
+
     if (pictureData) {
       updatePagination();
     }
@@ -94,11 +109,16 @@ const MainContainer: FunctionComponent = () => {
 
   return (
     <div>
-      <h2>My Photo Gallery</h2>
+      <h1 style={headerStyles}>My Photo Gallery</h1>
       <Gallery picturesPage={picturesPage} onImageClick={(id: string) => openModal(id)} />
+      <div className="ui divider"></div>
+      <div style={footerStyles}>
+        <button className="ui large blue button" onClick={onRequestMorePictures}>
+          More photos
+        </button>
+      </div>
       <Modal
         isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Photo information"
